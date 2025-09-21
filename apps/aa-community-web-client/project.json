@@ -1,0 +1,95 @@
+{
+  "name": "aa-community-web-client",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/aa-community-web-client/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular/build:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/aa-community-web-client",
+        "browser": "apps/aa-community-web-client/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/aa-community-web-client/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/aa-community-web-client/public"
+          }
+        ],
+        "styles": ["apps/aa-community-web-client/src/styles.scss"],
+        "server": "apps/aa-community-web-client/src/main.server.ts",
+        "ssr": {
+          "entry": "apps/aa-community-web-client/src/server.ts"
+        },
+        "outputMode": "server"
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kb",
+              "maximumError": "8kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "continuous": true,
+      "executor": "@angular/build:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "aa-community-web-client:build:production"
+        },
+        "development": {
+          "buildTarget": "aa-community-web-client:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular/build:extract-i18n",
+      "options": {
+        "buildTarget": "aa-community-web-client:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{options.reportsDirectory}"],
+      "options": {
+        "reportsDirectory": "../../coverage/apps/aa-community-web-client"
+      }
+    },
+    "serve-static": {
+      "continuous": true,
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "aa-community-web-client:build",
+        "port": 4200,
+        "staticFilePath": "dist/apps/aa-community-web-client/browser",
+        "spa": true
+      }
+    }
+  }
+}
