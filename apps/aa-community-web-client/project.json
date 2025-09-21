@@ -12,7 +12,7 @@
       "options": {
         "outputPath": "dist/apps/aa-community-web-client",
         "browser": "apps/aa-community-web-client/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [],
         "tsConfig": "apps/aa-community-web-client/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
