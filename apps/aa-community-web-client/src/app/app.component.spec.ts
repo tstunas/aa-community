@@ -1,20 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { NxWelcomeComponent } from './nx-welcome.component';
 import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent, NxWelcomeComponent],
+      imports: [AppComponent],
       providers: [provideZonelessChangeDetection()],
     }).compileComponents();
   });
 
-  it('should render title', () => {
+  it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Welcome aa-community-web-client');
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
   });
 });
