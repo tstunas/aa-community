@@ -1,0 +1,17 @@
+{
+  "name": "aa-community-backend-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "implicitDependencies": ["aa-community-backend"],
+  "targets": {
+    "e2e": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{e2eProjectRoot}"],
+      "options": {
+        "jestConfig": "apps/aa-community-backend-e2e/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "dependsOn": ["aa-community-backend:build", "aa-community-backend:serve"]
+    }
+  }
+}
